@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block title %}Список книг{% endblock %}
+
+
+{% block content %}
+    <h1>Book List</h1>
+    <a href="{% url 'book_new' %}">Добавить книгу</a>
+    <ul>
+        {% for book in page_obj %}
+            <li>
+                {{ book.name }} - {{ book.author }}, цена: {{ book.price }} рублей, жанр: {{ book.genre }}
+                <a href="{% url 'book_edit' book.pk %}">Изменить</a>
+                <a href="{% url 'book_delete' book.pk %}">Удалить</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; Первая</a>
+                <a href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+            {% endif %}
+
+            <span class="current">
+                Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Следующая</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">Последняя &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+
+{% endblock %}
