@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block title %}Авторизация{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Авторизация</h1>
+    <div class="card p-4">
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="username" class="form-label">Имя пользователя:</label>
+                <input type="text" id="username" name="username" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Пароль:</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary">Войти</button>
+                <a href="{% url 'registration' %}" class="btn btn-success">Зарегистрироваться</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+

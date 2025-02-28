@@ -3,18 +3,28 @@
 {% block title %}Добавить книгу{% endblock %}
 
 {% block content %}
-    <h1>Добавить книгу</h1>
-    <form method="post">
-        {% csrf_token %}
-        <label for="name">Название:</label>
-        <input type="text" id="name" name="name" required><br><br>
-        <label for="author">Автор:</label>
-        <input type="text" id="author" name="author" required><br><br>
-        <label for="price">Цена:</label>
-        <input type="number" id="price" name="price" required><br><br>
-        <label for="genre">Жанр:</label>
-        <input type="text" id="genre" name="genre" required><br><br>
-        <button type="submit">Сохранить</button>
-    </form>
-    <a href="{% url 'book_list' %}">Вернуться к списку</a>
+    <h1 class="mb-4">Добавить книгу</h1>
+    <div class="card p-4">
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Название:</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="author" class="form-label">Автор:</label>
+                <input type="text" id="author" name="author" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Цена:</label>
+                <input type="number" id="price" name="price" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="genre" class="form-label">Жанр:</label>
+                <input type="text" id="genre" name="genre" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <a href="{% url 'book_list' %}" class="btn btn-secondary">Вернуться к списку</a>
+        </form>
+    </div>
 {% endblock %}
