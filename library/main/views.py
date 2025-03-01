@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.contrib.auth import login
 
 from .models import Book
@@ -97,3 +97,15 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('book_list')
+
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        form = UserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile') 
+    else:
+        form = UserChangeForm(instance=request.user)
+    return render(request, 'profile.html', {'form': form})
